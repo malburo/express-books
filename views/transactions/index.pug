@@ -1,0 +1,10 @@
+extends ../layouts/layout.pug
+block content
+  a(href="/transactions/create") Thuê sách
+  p Sách đang được mượn:
+  ul
+    each transaction in transactions
+      if !transaction.isComplete
+        li
+          span #{transaction.userName} Đang mượn quyển sách: #{transaction.bookTitle}
+          a(href="/transactions/" + transaction.id + "/complete") Click nếu đã trả sách

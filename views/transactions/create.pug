@@ -1,0 +1,10 @@
+extends ../layouts/layout.pug
+block content
+  form(action='/transactions/create', method='POST')
+    select(name='userId')
+      each user in users
+        option(name= user.email, value= user.id) #{user.email}
+    select(name='bookId')
+      each book in books
+        option(name= book.title, value= book.id) #{book.title}
+    button Thuê

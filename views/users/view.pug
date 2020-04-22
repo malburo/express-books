@@ -1,0 +1,9 @@
+extends ../layouts/layout.pug
+block content
+    h1 Info user
+    a(href="/users") user list
+    p name: #{user.name}
+    p email: #{user.email}
+    a(href="/users/" + user.id + "/update") update user
+    span &nbsp
+    a(href="/users/" + user.id + "/delete") delete user

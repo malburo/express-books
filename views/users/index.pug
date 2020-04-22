@@ -1,0 +1,9 @@
+extends ../layouts/layout.pug
+block content
+  h1 Users
+  a(href="/users/create") Create
+  ul
+    each user in users 
+      li
+        span= user.name
+        a(href="/users/view/" + user.id) view

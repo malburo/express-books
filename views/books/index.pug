@@ -1,0 +1,17 @@
+extends ../layouts/layout.pug
+block content
+  h1 Libary
+  form(action="/books/create", method="POST")
+    input(name="title", type="text", placeholder="new title")
+    input(name="decription", type="text", placeholder="new decription")
+    button add new 
+  ul
+    each book in books 
+      li
+        span= book.title
+        span &nbsp
+        a(href="/books/" + book.id, label="update") Update Title
+        span &nbsp&nbsp&nbsp            
+        a(href="/books/" + book.id + "/delete", label="delete") Delete
+        p Decription: #{book.decription}
+             

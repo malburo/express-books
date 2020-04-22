@@ -1,0 +1,6 @@
+extends ../layouts/layout.pug
+block content
+  p Update name
+  form(action="/users/" + user.id + "/update", method="POST")
+    input(type="text", name="name", placeholder="new name")
+    button Update

@@ -1,0 +1,7 @@
+extends ../layouts/layout.pug
+block content
+  p Title #{book.title}
+  p Decription: #{book.decription}
+  form(action="/books/" + book.id + "/update", method="POST")
+    input(name="title", type="text", placeholder="new title")
+    button Update
