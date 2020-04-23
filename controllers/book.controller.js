@@ -6,6 +6,9 @@ module.exports.index = (req, res) => {
     books: db.get("books").value()
   });
 };
+module.exports.create = (req, res) => {
+  res.render("books/create");
+};
 module.exports.postCreate = (req, res) => {
   req.body.id = shortid.generate();
   db.get("books")

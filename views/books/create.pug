@@ -1,0 +1,13 @@
+extends ../layouts/layout.pug
+block content
+  .row
+    .col-4.m-auto
+      .text-center
+        h3.mb-3 Add new book
+      form(action="/books/create", method="POST")
+        .form-group
+          input.form-control(type='text', placeholder='Book title', name="title")
+        .form-group
+          input.form-control(type='text', placeholder='Decription', name="decription")
+        .text-center
+          button.btn.btn-primary.px-10(type='submit') Submit

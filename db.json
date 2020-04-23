@@ -1,7 +1,7 @@
 {
   "books": [
     {
-      "title": "You don't know js",
+      "title": "You don't know jss",
       "decription": "Một quyển sách javascript vô cùng thú vị",
       "id": "ppp1e-KD8"
     },
@@ -62,7 +62,7 @@
       "bookId": "ppp1e-KD8",
       "userName": "Tong quoc bao",
       "bookTitle": "You don't know js",
-      "isComplete": true
+      "isComplete": false
     },
     {
       "id": "K7CJth5kO",
@@ -71,54 +71,6 @@
       "userName": "Ngoc Trinh",
       "bookTitle": "You don't know js",
       "isComplete": true
-    },
-    {
-      "id": "kPP5-qB7K",
-      "userId": "qt3cz-Q85",
-      "bookId": "ppp1e-KD8",
-      "userName": "Ngoc Trinh",
-      "bookTitle": "You don't know js",
-      "isComplete": true
-    },
-    {
-      "id": "sB2L0Bzr42",
-      "userId": "qt3cz-Q85",
-      "bookId": "ppp1e-KD8",
-      "userName": "Ngoc Trinh",
-      "bookTitle": "You don't know js",
-      "isComplete": false
-    },
-    {
-      "id": "fGzymnMM7",
-      "userId": "atrqx-I94",
-      "bookId": "ppp1e-KD8",
-      "userName": "Độ mixi",
-      "bookTitle": "You don't know js",
-      "isComplete": false
-    },
-    {
-      "id": "7Us2WtAAVc",
-      "userId": "atrqx-I94",
-      "bookId": "ppp1e-KD8",
-      "userName": "Độ mixi",
-      "bookTitle": "You don't know js",
-      "isComplete": true
-    },
-    {
-      "id": "BQSFLdG2v",
-      "userId": "atrqx-I94",
-      "bookId": "gdsza-K18",
-      "userName": "Độ mixi",
-      "bookTitle": "Master CSS",
-      "isComplete": false
-    },
-    {
-      "id": "hkSwjUqUW",
-      "userId": "wqz1e-K88",
-      "bookId": "gdsza-K18",
-      "userName": "Tong quoc bao",
-      "bookTitle": "Master CSS",
-      "isComplete": false
     }
   ]
 }

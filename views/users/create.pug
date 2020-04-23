@@ -1,8 +1,35 @@
 extends ../layouts/layout.pug
 block content
-  p Create new user
-  form(action="/users/create", method="POST")
-    input(type="text", name="name", placeholder="name")
-    input(type="text", name="email", placeholder="email")
-    input(type="password", name="password", placeholder="password")
-    button add user
+  .row
+    .col-4.m-auto
+      .text-center
+        h3.mb-3 Sign up
+        if errors
+          form(action="/users/create", method="POST")
+            .form-group
+              input.form-control(type='text', placeholder='Your name', name="name", value=currentValues ? currentValues.name:"",class=errors.name ? "is-invalid": errors.nameLength ? "is-invalid":"")
+              if errors.name
+                .invalid-feedback Please provide your name.
+              if errors.nameLength
+                .invalid-feedback Your name is too long.
+            .form-group
+              input.form-control(type='email', placeholder='Enter email', name="email",value=currentValues ? currentValues.email:"", class=errors.email ? "is-invalid":"")
+              if errors.email
+                .invalid-feedback Please provide your email.
+            .form-group
+              input.form-control(type='password', placeholder='Password', name="password", class=errors.password ? "is-invalid":"")
+              if errors.password
+                .invalid-feedback Please provide your password.
+            .text-center
+              button.btn.btn-primary.px-10(type='submit') Submit
+        else
+          form(action="/users/create", method="POST")
+            .form-group
+              input.form-control(type='text', placeholder='Your name', name="name")
+              small.text-muted Must be 0-30 characters long
+            .form-group
+              input.form-control(type='email', placeholder='Enter email', name="email")
+            .form-group
+              input.form-control(type='password', placeholder='Password', name="password")
+            .text-center
+              button.btn.btn-primary.px-10(type='submit') Submit
