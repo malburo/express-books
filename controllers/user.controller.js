@@ -1,5 +1,6 @@
 let db = require("../db.js");
 const shortid = require("shortid");
+const bcrypt = require("bcrypt");
 
 module.exports.index = (req, res) => {
   res.render("users/index", {
@@ -9,13 +10,18 @@ module.exports.index = (req, res) => {
 module.exports.create = (req, res) => {
   res.render("users/create");
 };
-module.exports.postCreate = (req, res) => {
+
+module.exports.postCreate = async (req, res) => {
   req.body.id = shortid.generate();
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  req.body.password = hashedPassword;
   db.get("users")
     .push(req.body)
     .write();
+  console.log(db.get("users").value());
   res.redirect("/users");
 };
+
 module.exports.get = (req, res) => {
   let id = req.params.id;
   let user = db

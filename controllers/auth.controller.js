@@ -1,10 +1,11 @@
-let db = require("../db.js");
+const db = require("../db.js");
+const bcrypt = require("bcrypt");
 
 module.exports.login = (req, res) => {
   res.render("auth/login");
 };
 
-module.exports.postLogin = (req, res) => {
+module.exports.postLogin = async (req, res) => {
   let errors = {};
   let user = db
     .get("users")
@@ -20,7 +21,10 @@ module.exports.postLogin = (req, res) => {
     return;
   }
 
-  if (user.password !== req.body.password) {
+  const match = await bcrypt.compare(req.body.password, user.password);
+
+  if (!match) {
+    //login
     errors.password = "Password is wrong";
     res.render("auth/login", {
       errors: errors,

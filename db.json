@@ -15,20 +15,20 @@
     {
       "name": "Tong quoc bao",
       "email": "admin@gmail.com",
-      "password": "123123",
+      "password": "$2b$10$UB7OOk6lZjxS1V2UcScGkOyGZXP4Ktan63HiK82mOYASJxhrKDWnW",
       "id": "wqz1e-K88",
       "isAdmin": true
     },
     {
       "name": "Ngoc Trinh",
       "email": "trinh@gmail.com",
-      "password": "123123",
+      "password": "$2b$10$UB7OOk6lZjxS1V2UcScGkOyGZXP4Ktan63HiK82mOYASJxhrKDWnW",
       "id": "qt3cz-Q85"
     },
     {
       "name": "Độ mixi",
       "email": "dochet@gmail.com",
-      "password": "123123",
+      "password": "$2b$10$UB7OOk6lZjxS1V2UcScGkOyGZXP4Ktan63HiK82mOYASJxhrKDWnW",
       "id": "atrqx-I94"
     }
   ],
