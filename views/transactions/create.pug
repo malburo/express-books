@@ -3,17 +3,15 @@ block content
   form(action='/transactions/create', method='POST')
     .input-group.mb-3
       .input-group-prepend
-        label.input-group-text(for='email') Email
-      select#email.custom-select(name='userId')
+        label.input-group-text Email
+      select.custom-select(name='userId')
         each user in users
-          option Choose...
           option(name= user.email, value= user.id) #{user.email}
     .input-group.mb-3
       .input-group-prepend
-        label.input-group-text(for='email') Email
-      select#email.custom-select(name='userId')
+        label.input-group-text Books
+      select.custom-select(name='bookId')
         each book in books
-          option Choose...
           option(name= book.title, value= book.id) #{book.title}
     button.btn.btn-primary.px-10(type='submit') Submit
 

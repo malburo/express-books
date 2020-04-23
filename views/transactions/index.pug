@@ -12,13 +12,25 @@ block content
         th 
     tbody
     each transaction in transactions
-      tr
-        td= transaction.userName
-        td= transaction.bookTitle
-        if !transaction.isComplete
-          td Đang mượn
-          td
-            a.btn.btn-primary(href="/transactions/" + transaction.id + "/complete") Hoàn thành
-        else
-          td Đã trả
-          td
+      if isAdmin
+        tr
+          td= transaction.userName
+          td= transaction.bookTitle
+          if !transaction.isComplete
+            td Đang mượn
+            td
+              a.btn.btn-primary(href="/transactions/" + transaction.id + "/complete") Hoàn thành
+          else
+            td Đã trả
+            td
+      else 
+        tr
+          td= transaction.userName
+          td= transaction.bookTitle
+          if !transaction.isComplete
+            td Đang mượn
+            td
+              a.btn.btn-primary(href="/transactions/" + transaction.id + "/complete") Hoàn thành
+          else
+            td Đã trả
+            td

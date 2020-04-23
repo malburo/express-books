@@ -2,9 +2,23 @@ let db = require("../db.js");
 const shortid = require("shortid");
 
 module.exports.index = (req, res) => {
-  res.render("transactions/index", {
-    transactions: db.get("transactions").value()
-  });
+  if (res.locals.isAdmin) {
+    res.render("transactions/index", {
+      transactions: db.get("transactions").value(),
+      isAdmin: true
+    });
+  } else {
+    let newObj = db
+      .get("transactions")
+      .value()
+      .filter(item => {
+        return item.userId === res.locals.id;
+      });
+    res.render("transactions/index", {
+      transactions: newObj,
+      isAdmin: false
+    });
+  }
 };
 
 module.exports.create = (req, res) => {
@@ -14,28 +28,23 @@ module.exports.create = (req, res) => {
   });
 };
 module.exports.postCreate = (req, res) => {
-  console.log(req.body);
-  if (req.body.userId === "Choose...") {
-    let id = shortid.generate();
-    let userId = req.body.userId;
-    let bookId = req.body.bookId;
-    let userName = db
-      .get("users")
-      .find({ id: userId })
-      .value().name;
-    let bookTitle = db
-      .get("books")
-      .find({ id: bookId })
-      .value().title;
-    let isComplete = false;
-    let transaction = { id, userId, bookId, userName, bookTitle, isComplete };
-    db.get("transactions")
-      .push(transaction)
-      .write();
-    res.redirect("/transactions");
-  } else {
-    res.redirect("/transactions/create");
-  }
+  let id = shortid.generate();
+  let userId = req.body.userId;
+  let bookId = req.body.bookId;
+  let userName = db
+    .get("users")
+    .find({ id: userId })
+    .value().name;
+  let bookTitle = db
+    .get("books")
+    .find({ id: bookId })
+    .value().title;
+  let isComplete = false;
+  let transaction = { id, userId, bookId, userName, bookTitle, isComplete };
+  db.get("transactions")
+    .push(transaction)
+    .write();
+  res.redirect("/transactions");
 };
 module.exports.complete = (req, res) => {
   let errors = [];

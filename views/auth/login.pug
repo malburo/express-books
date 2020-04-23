@@ -5,13 +5,7 @@ block content
       .text-center
         h3.mb-3 Sign up
         if errors
-          form(action="/users/create", method="POST")
-            .form-group
-              input.form-control(type='text', placeholder='Your name', name="name", value=currentValues ? currentValues.name:"",class=errors.name ? "is-invalid": errors.nameLength ? "is-invalid":"")
-              if errors.name
-                .invalid-feedback= errors.name
-              if errors.nameLength
-                .invalid-feedback= errors.nameLength
+          form(action="/auth/login", method="POST")
             .form-group
               input.form-control(type='email', placeholder='Enter email', name="email",value=currentValues ? currentValues.email:"", class=errors.email ? "is-invalid":"")
               if errors.email
@@ -23,10 +17,7 @@ block content
             .text-center
               button.btn.btn-primary.px-10(type='submit') Submit
         else
-          form(action="/users/create", method="POST")
-            .form-group
-              input.form-control(type='text', placeholder='Your name', name="name")
-              small.text-muted Must be 0-30 characters long
+          form(action="/auth/login", method="POST")
             .form-group
               input.form-control(type='email', placeholder='Enter email', name="email")
             .form-group
