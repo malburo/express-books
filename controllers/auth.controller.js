@@ -20,7 +20,6 @@ module.exports.postLogin = async (req, res) => {
     });
     return;
   }
-
   const match = await bcrypt.compare(req.body.password, user.password);
 
   if (!match) {
@@ -32,6 +31,8 @@ module.exports.postLogin = async (req, res) => {
     });
     return;
   }
-  res.cookie("userId", user.id);
+  res.cookie("userId", user.id, {
+    signed: true
+  });
   res.redirect("/");
 };

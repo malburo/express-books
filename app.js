@@ -15,7 +15,7 @@ app.set("views", "./views");
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser("ahihidongoc"));
 
 app.get("/", (req, res) => {
   res.render("index");
