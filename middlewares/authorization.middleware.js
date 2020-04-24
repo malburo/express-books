@@ -2,7 +2,7 @@ let db = require("../db.js");
 module.exports.authorization = (req, res, next) => {
   let user = db
     .get("users")
-    .find({ id: req.cookies.userId })
+    .find({ id: req.signedCookies.userId })
     .value();
   if (user.isAdmin) {
     res.locals.isAdmin = true;

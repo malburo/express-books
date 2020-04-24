@@ -2,8 +2,23 @@ const shortid = require("shortid");
 let db = require("../db.js");
 
 module.exports.index = (req, res) => {
+  let page = parseInt(req.query.page) || 1;
+
+  let perPage = 8;
+  let start = (page - 1) * perPage;
+  let end = page * perPage;
+  let books = db
+    .get("books")
+    .value()
+    .slice(start, end);
+  let isEmtyBooks = false;
+  if (Object.keys(books).length === 0) {
+    isEmtyBooks = true;
+  }
   res.render("books/index", {
-    books: db.get("books").value()
+    books: books,
+    page: page,
+    isEmtyBooks: isEmtyBooks
   });
 };
 module.exports.create = (req, res) => {

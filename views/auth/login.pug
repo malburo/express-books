@@ -5,6 +5,8 @@ block content
       .text-center
         h3.mb-3 Sign up
         if errors
+          if errors.wrongLoginCount 
+            p= errors.wrongLoginCount 
           form(action="/auth/login", method="POST")
             .form-group
               input.form-control(type='email', placeholder='Enter email', name="email",value=currentValues ? currentValues.email:"", class=errors.email ? "is-invalid":"")

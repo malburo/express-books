@@ -6,7 +6,7 @@ block content
   .row
     each book in books
       .col-3
-        .card
+        .card.mb-5
           img.card-img-top(src='https://i.picsum.photos/id/1050/300/300.jpg', alt='Card image cap')
           .card-body
             h5.card-title= book.title
@@ -14,3 +14,40 @@ block content
             .d-flex.justify-content-around.align-items-center
               a.btn.btn-primary(href="/books/" + book.id, label="update") Update Title
               a.btn.btn-primary(href="/books/" + book.id + "/delete", label="delete") Delete
+  if !isEmtyBooks
+    if page === 1
+      nav(aria-label='Page navigation example')
+        ul.pagination.justify-content-center
+          li.page-item.disabled
+            a.page-link(href='#', tabindex='-1', aria-disabled='true', name="page") Previous
+          li.page-item
+            a.page-link(href='?page='+ page)= page
+          li.page-item
+            a.page-link(href='?page='+ (page+1))= page+1
+          li.page-item
+            a.page-link(href='?page='+ (page+2))= page+2
+          li.page-item
+            a.page-link(href='?page='+ (page+3))= page+3
+          li.page-item
+            a.page-link(href='?page='+ (page+4))= page+4        
+          li.page-item
+            a.page-link(href='?page='+ (page+1)) Next
+    else
+      nav(aria-label='Page navigation example')
+        ul.pagination.justify-content-center
+          li.page-item
+            a.page-link(href='?page='+ (page-1)) Previous
+          li.page-item
+            a.page-link(href='?page='+ page)= page
+          li.page-item
+            a.page-link(href='?page='+ (page+1))= page+1
+          li.page-item
+            a.page-link(href='?page='+ (page+2))= page+2
+          li.page-item
+            a.page-link(href='?page='+ (page+3))= page+3
+          li.page-item
+            a.page-link(href='?page='+ (page+4))= page+4             
+          li.page-item
+          a.page-link(href='?page='+ (page+1)) Next
+  else
+    p Hết sản phẩm rùi ahihi

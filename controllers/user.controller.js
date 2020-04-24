@@ -18,7 +18,6 @@ module.exports.postCreate = async (req, res) => {
   db.get("users")
     .push(req.body)
     .write();
-  console.log(db.get("users").value());
   res.redirect("/users");
 };
 
