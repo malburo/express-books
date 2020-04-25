@@ -5,18 +5,21 @@ block content
     a.btn.btn-primary(href="/users/create") Create new user
   table.table
     thead.thead-dark
-      tr.d-flex
-        th.col-4 Full Name
-        th.col-4 Email
-        th.col-4 
+      tr
+        th Avatar
+        th Full Name
+        th Email
+        th 
     tbody
       each user in users
-        tr.d-flex
-          td.col-4= user.name
-          td.col-4= user.email
-          td.col-4
+        tr
+          td.align-middle
+            img.rounded-circle(src= user.avatar, width="40", height="40")
+          td.align-middle= user.name
+          td.align-middle= user.email
+          td.align-middle
             .d-flex.justify-content-around.align-items-center
-              a.btn.btn-light(href="/users/view/" + user.id) View
-              a.btn.btn-success(href="/users/view/" + user.id) Update
-              a.btn.btn-danger(href="/users/" + user.id + "/delete") Delete
+              a.btn.btn-light(href=`/users/view/${user.id}`) View
+              a.btn.btn-success(href=`/users/${user.id}/update`) Update
+              a.btn.btn-danger(href=`/users/${user.id}/delete`) Delete
         

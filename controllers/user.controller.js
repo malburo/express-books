@@ -2,6 +2,14 @@ let db = require("../db.js");
 const shortid = require("shortid");
 const bcrypt = require("bcrypt");
 
+var cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret
+});
+
 module.exports.index = (req, res) => {
   res.render("users/index", {
     users: db.get("users").value()
@@ -15,6 +23,8 @@ module.exports.postCreate = async (req, res) => {
   req.body.id = shortid.generate();
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   req.body.password = hashedPassword;
+  req.body.avatar =
+    "https://res.cloudinary.com/malburo/image/upload/v1587739176/default-avatar_o2xet3.webp";
   db.get("users")
     .push(req.body)
     .write();
@@ -43,11 +53,18 @@ module.exports.update = (req, res) => {
 };
 module.exports.postUpdate = (req, res) => {
   let id = req.params.id;
-  db.get("users")
-    .find({ id: id })
-    .assign({ name: req.body.name })
-    .write();
-  res.redirect("/users");
+  req.body.avatar = req.file.path
+    .split("/")
+    .slice(1)
+    .join("/");
+  cloudinary.uploader.upload(req.file.path, function(error, result) {
+    req.body.avatar = result.url;
+    db.get("users")
+      .find({ id: id })
+      .assign({ name: req.body.name, avatar: req.body.avatar })
+      .write();
+    res.redirect("/users");
+  });
 };
 module.exports.delete = (req, res) => {
   let id = req.params.id;

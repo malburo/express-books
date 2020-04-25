@@ -58,21 +58,24 @@
       "password": "$2b$10$UB7OOk6lZjxS1V2UcScGkOyGZXP4Ktan63HiK82mOYASJxhrKDWnW",
       "id": "wqz1e-K88",
       "isAdmin": true,
-      "wrongLoginCount": 0
+      "wrongLoginCount": 0,
+      "avatar": "https://res.cloudinary.com/malburo/image/upload/v1587738919/qcaqbgy24jrnkirchxtb.jpg"
     },
     {
       "name": "Ngoc Trinh",
       "email": "trinh@gmail.com",
       "password": "$2b$10$UB7OOk6lZjxS1V2UcScGkOyGZXP4Ktan63HiK82mOYASJxhrKDWnW",
       "id": "qt3cz-Q85",
-      "wrongLoginCount": 0
+      "wrongLoginCount": 0,
+      "avatar": "https://res.cloudinary.com/malburo/image/upload/v1587739176/default-avatar_o2xet3.webp"
     },
     {
       "name": "Độ mixi",
       "email": "dochet@gmail.com",
       "password": "$2b$10$UB7OOk6lZjxS1V2UcScGkOyGZXP4Ktan63HiK82mOYASJxhrKDWnW",
       "id": "atrqx-I94",
-      "wrongLoginCount": 0
+      "wrongLoginCount": 0,
+      "avatar": "https://res.cloudinary.com/malburo/image/upload/v1587739176/default-avatar_o2xet3.webp"
     }
   ],
   "transactions": [
