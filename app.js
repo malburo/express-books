@@ -8,19 +8,22 @@ const transactionsRouter = require("./routes/transactions.route");
 const authRouter = require("./routes/auth.route");
 const authMiddleware = require("./middlewares/auth.middleware");
 const authorMiddleware = require("./middlewares/authorization.middleware");
+const sessionMiddleware = require("./middlewares/session.middleware.js");
 var cookieParser = require("cookie-parser");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
+
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser("ahihi"));
 
+app.use(sessionMiddleware);
 app.get("/", (req, res) => {
   res.render("index");
 });
-app.use("/books", authMiddleware.requireAuth, bookRouter);
+app.use("/books", bookRouter);
 app.use("/users", authMiddleware.requireAuth, userRouter);
 app.use(
   "/transactions",
