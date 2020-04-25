@@ -7,5 +7,5 @@ db.defaults({
     products: [],
     sessions: [],
     transfers: []
-  })
+  }) 
 module.exports = db;
