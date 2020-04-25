@@ -2,23 +2,21 @@ let db = require("../db.js");
 const shortid = require("shortid");
 
 module.exports.index = (req, res) => {
-  if (res.locals.isAdmin) {
+  if (res.locals.user.isAdmin) {
     res.render("transactions/index", {
-      transactions: db.get("transactions").value(),
-      isAdmin: true
+      transactions: db.get("transactions").value()
     });
-  } else {
-    let newObj = db
-      .get("transactions")
-      .value()
-      .filter(item => {
-        return item.userId === res.locals.id;
-      });
-    res.render("transactions/index", {
-      transactions: newObj,
-      isAdmin: false
-    });
+    return;
   }
+  let filterById = db
+    .get("transactions")
+    .value()
+    .filter(item => {
+      return item.userId === res.locals.user.id;
+    });
+  res.render("transactions/index", {
+    transactions: filterById
+  });
 };
 
 module.exports.create = (req, res) => {

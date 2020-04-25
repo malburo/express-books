@@ -6,8 +6,10 @@ const bookRouter = require("./routes/book.route");
 const userRouter = require("./routes/user.route");
 const transactionsRouter = require("./routes/transactions.route");
 const authRouter = require("./routes/auth.route");
+const cartRouter = require("./routes/cart.route");
+
 const authMiddleware = require("./middlewares/auth.middleware");
-const authorMiddleware = require("./middlewares/authorization.middleware");
+
 const sessionMiddleware = require("./middlewares/session.middleware.js");
 var cookieParser = require("cookie-parser");
 
@@ -28,11 +30,10 @@ app.use("/users", authMiddleware.requireAuth, userRouter);
 app.use(
   "/transactions",
   authMiddleware.requireAuth,
-  authorMiddleware.authorization,
   transactionsRouter
 );
 app.use("/auth", authRouter);
-
+app.use("/cart", cartRouter);
 var listener = app.listen(8080, function() {
   console.log("Listening on port " + listener.address().port);
 });

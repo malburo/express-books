@@ -5,9 +5,9 @@ const bcrypt = require("bcrypt");
 var cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
-  cloud_name: process.env.cloud_name,
-  api_key: process.env.api_key,
-  api_secret: process.env.api_secret
+  cloud_name: "malburo",
+  api_key: "173387749476429",
+  api_secret: "FAapfVJZfRgu4m6eZ-JJKqzfvPY"
 });
 
 module.exports.index = (req, res) => {
@@ -63,7 +63,7 @@ module.exports.postUpdate = (req, res) => {
       .find({ id: id })
       .assign({ name: req.body.name, avatar: req.body.avatar })
       .write();
-    res.redirect("/users");
+    res.redirect(`/users/view/${id}`);
   });
 };
 module.exports.delete = (req, res) => {

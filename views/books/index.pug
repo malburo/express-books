@@ -2,7 +2,8 @@ extends ../layouts/layout.pug
 block content
   .d-flex.justify-content-between.align-items-center.mb-5
     h3 Libary
-    a.btn.btn-primary(href="/books/create") Create new book
+    if user.isAdmin
+      a.btn.btn-primary(href="/books/create") Create new book
   .row
     each book in books
       .col-3
@@ -11,9 +12,12 @@ block content
           .card-body
             h5.card-title= book.title
             p.card-text= book.decription
-            .d-flex.justify-content-around.align-items-center
-              a.btn.btn-primary(href="/books/" + book.id, label="update") Update Title
-              a.btn.btn-primary(href="/books/" + book.id + "/delete", label="delete") Delete
+            if user.isAdmin
+              .d-flex.justify-content-around
+                a.btn.btn-primary(href="/books/" + book.id, label="update") Update Title
+                a.btn.btn-primary(href="/books/" + book.id + "/delete", label="delete") Delete
+            .d-flex.justify-content-around.mt-3
+              a.btn.btn-primary(href="/cart/" + book.id) Thuê sách
   if !isEmtyBooks
     if page === 1
       nav(aria-label='Page navigation example')

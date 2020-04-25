@@ -49,16 +49,6 @@
       "title": "Angular",
       "decription": "Một quyển sách vô cùng thú vị",
       "id": "9dsza-K18"
-    },
-    {
-      "title": "vbnvb",
-      "decription": "vbn",
-      "id": "jkihEtRc0"
-    },
-    {
-      "title": "bvcbvc",
-      "decription": "cvbvc",
-      "id": "xFPZBQZ5C"
     }
   ],
   "users": [
@@ -72,12 +62,12 @@
       "avatar": "https://res.cloudinary.com/malburo/image/upload/v1587738919/qcaqbgy24jrnkirchxtb.jpg"
     },
     {
-      "name": "Ngoc Trinh",
+      "name": "Ngoc Trinhs",
       "email": "trinh@gmail.com",
       "password": "$2b$10$UB7OOk6lZjxS1V2UcScGkOyGZXP4Ktan63HiK82mOYASJxhrKDWnW",
       "id": "qt3cz-Q85",
       "wrongLoginCount": 0,
-      "avatar": "https://res.cloudinary.com/malburo/image/upload/v1587739176/default-avatar_o2xet3.webp"
+      "avatar": "http://res.cloudinary.com/malburo/image/upload/v1587812858/lkh9v2lxfpxlazrhjzvz.png"
     },
     {
       "name": "Độ mixi",
@@ -132,19 +122,67 @@
   ],
   "sessions": [
     {
-      "id": "b6QK1xjra"
+      "id": "LVRy2XyGB",
+      "cart": {
+        "1dsza-K18": 2,
+        "2pp1e-KD8": 1,
+        "3dsza-K18": 1,
+        "7dsza-K18": 1
+      }
     },
     {
-      "id": "VL043aljN"
+      "id": "-czO1-etM",
+      "cart": {
+        "1dsza-K18": 1,
+        "2pp1e-KD8": 2,
+        "3dsza-K18": 5
+      }
     },
     {
-      "id": "LG93pL8ju"
+      "id": "0Yzec6PwA",
+      "cart": {
+        "1dsza-K18": 1
+      }
     },
     {
-      "id": "3GUzyrSai"
+      "id": "qvkh_D7uA"
     },
     {
-      "id": "wOnuE6rKi"
+      "id": "yZ2wpqm8H"
+    },
+    {
+      "id": "JZcYjRlOx"
+    },
+    {
+      "id": "BlhFkH3Um"
+    },
+    {
+      "id": "NQWPcs6pE"
+    },
+    {
+      "id": "dKmnE5VNn"
+    },
+    {
+      "id": "wBX2olpxx"
+    },
+    {
+      "id": "cr_XBdmlq",
+      "cart": {
+        "3dsza-K18": 3,
+        "2pp1e-KD8": 1
+      }
+    },
+    {
+      "id": "9jNjm51WZ"
+    },
+    {
+      "id": "KJ1ydbjZ0"
+    },
+    {
+      "id": "5P9Xpp1P6",
+      "cart": {
+        "1dsza-K18": 3
+      }
     }
   ]
 }

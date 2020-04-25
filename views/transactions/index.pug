@@ -2,7 +2,8 @@ extends ../layouts/layout.pug
 block content
   .d-flex.justify-content-between.align-items-center.mb-5
     h3 Lịch sử giao dịch
-    a.btn.btn-primary(href="/transactions/create") Thuê sách
+    if user.isAdmin
+      a.btn.btn-primary(href="/transactions/create") Tạo transaction mới
   table.table
     thead.thead-dark
       tr
@@ -12,7 +13,7 @@ block content
         th 
     tbody
     each transaction in transactions
-      if isAdmin
+      if user.isAdmin
         tr
           td= transaction.userName
           td= transaction.bookTitle

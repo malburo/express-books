@@ -12,10 +12,14 @@ html
       #navbarNavAltMarkup.collapse.navbar-collapse
         .navbar-nav
           a.nav-item.nav-link(href='/') Home 
-          a.nav-item.nav-link(href='/users') Users
           a.nav-item.nav-link(href='/books') Books
           a.nav-item.nav-link(href='/transactions') Transactions
-      if user
-        p.text-light= user.name
+          if user.isAdmin
+            a.nav-item.nav-link(href='/users') Users
+      if amount
+        a.nav-item.nav-link.text-light(href='#') Cart(#{amount})
+      a.nav-item.nav-link.text-light(href='/auth/login') Login
+      a.nav-item.nav-link.text-light(href='/users/create') Sign up
+      a.nav-item.nav-link.text-light(href=`/users/view/${user.id}`)= user.name
     .container.pt-5
       block content

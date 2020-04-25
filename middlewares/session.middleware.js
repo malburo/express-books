@@ -13,6 +13,24 @@ module.exports = function(req, res, next) {
       id: sessionId
     }).write();
   }
-  console.log(db.get('sessions').value())
+  let objCart = db.get('sessions').find({id: req.signedCookies.sessionId}).value();
+  if(objCart) {
+      if(objCart.cart) {
+          res.locals.amount = Object.values(objCart.cart).reduce((a,b) => a+b) 
+      }
+  }
+  if (req.signedCookies.userId) {
+    let user = db
+    .get("users")
+    .find({ id: req.signedCookies.userId })
+    .value();
+    res.locals.user = user
+  }
+  else {
+      let user = {
+          name: "vô danh"
+      }
+      res.locals.user = user
+  }
   next();
 }

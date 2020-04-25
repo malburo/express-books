@@ -1,20 +1,12 @@
 extends ../layouts/layout.pug
 block content
-  h3 Update profile
-  img.rounded-circle(src= user.avatar, width="200", height="200", style="object-fit: cover")
-  form(action=`/users/${user.id}/update`, method='post', enctype='multipart/form-data')
-    input(type='file', name='avatar')
-    input(type="text", name="name", placeholder="new name")
-    button Update
-
-
-//- form(action=`/users/${user.id}/update`, method='post', enctype='multipart/form-data')
-//-   .form-row
-//-     .form-group.col-md-6
-//-       label(for='avatar') Update avatar
-//-       input#avatar.form-control-file(type='file', name='avatar')
-//-     .form-group.col-md-6
-//-       label(for='username') Username
-//-       input#username.form-control(type='username', name="name", placeholder="New name")
-//-   button.btn.btn-primary(type='submit') Update
-
+  .row
+    .col
+      h2 Update profile
+      img.rounded-circle(src= user.avatar, width="200", height="200", style="object-fit: cover")
+      form(action=`/users/${user.id}/update`, method='post', enctype='multipart/form-data')
+        .form-group.col-md-6
+          input.form-control-file.mt-5(type='file', name='avatar')
+        .form-group.col-md-3
+          input.form-control(type="text", name="name", placeholder="new name", value= user.name)
+          button.btn.btn-primary.mt-2 Update
