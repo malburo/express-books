@@ -1,6 +1,17 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+mongoose.connection.on('connected', () => {
+  console.log("Mongoose is connected")
+});
+mongoose.set('useFindAndModify', false);
 
 const bookRouter = require("./routes/book.route");
 const userRouter = require("./routes/user.route");
