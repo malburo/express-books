@@ -1,7 +1,7 @@
 extends ../layouts/layout.pug
 block content
     h1 Info user
-    img.rounded-circle(src= user.avatar, width="200", height="200", style="object-fit: cover")
-    p Username: #{user.name}
-    p Email: #{user.email}
-    a.btn.btn-primary(href="/users/" + user.id + "/update") update user
+    img.rounded-circle(src= users.avatar, width="200", height="200", style="object-fit: cover")
+    p Username: #{users.name}
+    p Email: #{users.email}
+    a.btn.btn-primary(href="/users/" + users.id + "/update") update user

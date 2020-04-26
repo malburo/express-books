@@ -42,7 +42,7 @@ module.exports.get = async (req, res) => {
   let id = req.params.id;
   let user = await User.findById(id)
   res.render("users/view", {
-    user: user
+    users: user
   });
 };
 module.exports.update = async (req, res) => {
