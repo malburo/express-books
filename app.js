@@ -20,8 +20,11 @@ const authRouter = require("./routes/auth.route");
 const cartRouter = require("./routes/cart.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
-
 const sessionMiddleware = require("./middlewares/session.middleware.js");
+
+// api
+const apiTransactions = require("./api/routes/transaction.route")
+const apiLogin = require("./api/routes/auth.route")
 var cookieParser = require("cookie-parser");
 
 app.set("view engine", "pug");
@@ -45,6 +48,9 @@ app.use(
 );
 app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
+
+app.use("/api/transactions", apiTransactions)
+app.use("/api/login", apiLogin)
 var listener = app.listen(8080, function() {
   console.log("Listening on port " + listener.address().port);
 });
