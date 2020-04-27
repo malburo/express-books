@@ -1,7 +1,7 @@
-
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model")
-var cloudinary = require("cloudinary").v2;
+
+let cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
   cloud_name: process.env.cloud_name,
@@ -10,7 +10,7 @@ cloudinary.config({
 });
 
 module.exports.index = async (req, res) => {
-  var users = await User.find()
+  let users = await User.find()
 
   res.render("users/index", {
     users: users

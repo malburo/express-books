@@ -6,12 +6,13 @@ module.exports.index = async (req, res) => {
   let start = (page - 1) * perPage;
   let end = page * perPage;
   let books = await Book.find()
+  let bookFilter = books.slice(start, end)
   let isEmtyBooks = false;
-  if (Object.keys(books).length === 0) {
+  if (bookFilter.length === 0) {
     isEmtyBooks = true;
   }
   res.render("books/index", {
-    books: books.slice(start, end),
+    books: bookFilter,
     page: page,
     isEmtyBooks: isEmtyBooks
   });

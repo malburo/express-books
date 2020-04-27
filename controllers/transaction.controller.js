@@ -10,8 +10,8 @@ module.exports.index = async (req, res) => {
     });
     return;
   }
-  let transactionFilterById = await Transaction.find({id: req.signedCookies.userId})
-  console.log(transactionFilterById);
+  let id = req.signedCookies.userId
+  let transactionFilterById = await Transaction.find({userId: id})
   res.render("transactions/index", {
     transactions: transactionFilterById
   });

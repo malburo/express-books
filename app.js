@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true
 });
 mongoose.connection.on('connected', () => {
-  console.log("Mongoose is connected")
+  console.log("Mongoose is connectedd")
 });
 mongoose.set('useFindAndModify', false);
 

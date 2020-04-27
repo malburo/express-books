@@ -1,4 +1,3 @@
-
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model")
 
@@ -9,10 +8,9 @@ module.exports.login = (req, res) => {
 module.exports.postLogin = async (req, res) => {
   let errors = {};
   let user = await User.findOne({email: req.body.email})
-  console.log(user)
   if (!user) {
-    errors.email = "Email is emty";
-    errors.password = "Password is emty";
+    errors.email = "Email is wrong";
+    errors.password = "Password is wrong";
     res.render("auth/login", {
       errors: errors,
       currentValues: req.body
