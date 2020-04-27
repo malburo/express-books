@@ -4,6 +4,7 @@ var router = express.Router();
 const controller = require("../controllers/book.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 const adminMiddleware = require("../middlewares/admin.middleware");
+const checkIdMiddleware = require("../middlewares/checkId.middleware");
 
 router.get("/", controller.index);
 router.get("/create",authMiddleware.requireAuth, adminMiddleware, controller.create);

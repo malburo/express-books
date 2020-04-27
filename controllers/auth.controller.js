@@ -1,5 +1,6 @@
-const db = require("../db.js");
+
 const bcrypt = require("bcrypt");
+const User = require("../models/user.model")
 
 module.exports.login = (req, res) => {
   res.render("auth/login");
@@ -7,10 +8,8 @@ module.exports.login = (req, res) => {
 
 module.exports.postLogin = async (req, res) => {
   let errors = {};
-  let user = db
-    .get("users")
-    .find({ email: req.body.email })
-    .value();
+  let user = await User.findOne({email: req.body.email})
+  console.log(user)
   if (!user) {
     errors.email = "Email is emty";
     errors.password = "Password is emty";
@@ -59,5 +58,6 @@ module.exports.postLogin = async (req, res) => {
   res.cookie("userId", user.id, {
     signed: true
   });
+
   res.redirect("/");
 };

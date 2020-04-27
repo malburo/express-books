@@ -1,4 +1,4 @@
-let db = require("../db.js");
+
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model")
 var cloudinary = require("cloudinary").v2;

@@ -8,6 +8,6 @@ const userSchema = new mongoose.Schema({
     wrongLoginCount: Number,
     avatar: String
   });
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('users', userSchema);
 
 module.exports = User

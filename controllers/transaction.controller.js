@@ -1,66 +1,43 @@
-let db = require("../db.js");
-const shortid = require("shortid");
 
-module.exports.index = (req, res) => {
+const Book = require("../models/book.model")
+const User = require("../models/user.model")
+const Transaction = require("../models/transaction.model")
+
+module.exports.index = async (req, res) => {
   if (res.locals.user.isAdmin) {
+    let transactions = await Transaction.find()
     res.render("transactions/index", {
-      transactions: db.get("transactions").value()
+      transactions: transactions
     });
     return;
   }
-  let filterById = db
-    .get("transactions")
-    .value()
-    .filter(item => {
-      return item.userId === res.locals.user.id;
-    });
+  let transactionFilterById = await Transaction.find({id: req.signedCookies.userId})
+  console.log(transactionFilterById);
   res.render("transactions/index", {
-    transactions: filterById
+    transactions: transactionFilterById
   });
 };
 
-module.exports.create = (req, res) => {
+module.exports.create = async (req, res) => {
+  let result = await Promise.all([User.find(), Book.find()])
   res.render("transactions/create", {
-    users: db.get("users").value(),
-    books: db.get("books").value()
+    users: result[0],
+    books: result[1]
   });
 };
-module.exports.postCreate = (req, res) => {
-  let id = shortid.generate();
+module.exports.postCreate = async (req, res) => {
   let userId = req.body.userId;
   let bookId = req.body.bookId;
-  let userName = db
-    .get("users")
-    .find({ id: userId })
-    .value().name;
-  let bookTitle = db
-    .get("books")
-    .find({ id: bookId })
-    .value().title;
   let isComplete = false;
-  let transaction = { id, userId, bookId, userName, bookTitle, isComplete };
-  db.get("transactions")
-    .push(transaction)
-    .write();
+  let user = await User.findById(userId)
+  let book = await Book.findById(bookId)
+  let transaction = { userId, bookId, userName: user.name, bookTitle: book.title, isComplete };
+  let Transactions = await Transaction
+  Transactions.create(transaction)
   res.redirect("/transactions");
 };
-module.exports.complete = (req, res) => {
-  let errors = [];
-  let result = db
-    .get("transactions")
-    .find({ id: req.params.id })
-    .value();
-  if (result) {
-    let id = req.params.id;
-    db.get("transactions")
-      .find({ id: id })
-      .assign({ isComplete: true })
-      .write();
-    res.redirect("/transactions");
-  } else {
-    errors.push("Id không tồn tại");
-    res.render("errors", {
-      errors: errors
-    });
-  }
+module.exports.complete = async (req, res) => {
+  let id = req.params.id
+  await Transaction.findByIdAndUpdate(id, { isComplete: true })
+  res.redirect("/transactions");
 };

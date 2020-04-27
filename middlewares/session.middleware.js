@@ -1,14 +1,14 @@
 var shortid = require('shortid');
 
 var db = require('../db');
+const User = require("../models/user.model")
 
-module.exports = function(req, res, next) {
+module.exports = async (req, res, next) => {
   if (!req.signedCookies.sessionId) {
     var sessionId = shortid.generate();
     res.cookie('sessionId', sessionId, {
       signed: true
     });
-
     db.get('sessions').push({
       id: sessionId
     }).write();
@@ -20,11 +20,9 @@ module.exports = function(req, res, next) {
       }
   }
   if (req.signedCookies.userId) {
-    let user = db
-    .get("users")
-    .find({ id: req.signedCookies.userId })
-    .value();
+    let user = await User.findById(req.signedCookies.userId)
     res.locals.user = user
+
   }
   else {
       let user = {
