@@ -1,22 +1,17 @@
-const shortid = require("shortid");
-let db = require("../db.js");
+const Book = require("../models/book.model")
 
-module.exports.index = (req, res) => {
+module.exports.index = async (req, res) => {
   let page = parseInt(req.query.page) || 1;
-
   let perPage = 8;
   let start = (page - 1) * perPage;
   let end = page * perPage;
-  let books = db
-    .get("books")
-    .value()
-    .slice(start, end);
+  let books = await Book.find()
   let isEmtyBooks = false;
   if (Object.keys(books).length === 0) {
     isEmtyBooks = true;
   }
   res.render("books/index", {
-    books: books,
+    books: books.slice(start, end),
     page: page,
     isEmtyBooks: isEmtyBooks
   });
@@ -24,35 +19,25 @@ module.exports.index = (req, res) => {
 module.exports.create = (req, res) => {
   res.render("books/create");
 };
-module.exports.postCreate = (req, res) => {
-  req.body.id = shortid.generate();
-  db.get("books")
-    .push(req.body)
-    .write();
+module.exports.postCreate = async (req, res) => {
+  let books = await Book;
+  books.create(req.body)
   res.redirect("/books");
 };
-module.exports.get = (req, res) => {
+module.exports.get = async (req, res) => {
   let id = req.params.id;
-  let book = db
-    .get("books")
-    .find({ id: id })
-    .value();
+  let book = await Book.findById(id);
   res.render("books/view", {
     book: book
   });
 };
-module.exports.postUpdate = (req, res) => {
+module.exports.postUpdate = async (req, res) => {
   let id = req.params.id;
-  db.get("books")
-    .find({ id: id })
-    .assign({ title: req.body.title })
-    .write();
+  await Book.findByIdAndUpdate(id, { title: req.body.title });
   res.redirect("/books");
 };
-module.exports.delete = (req, res) => {
+module.exports.delete = async (req, res) => {
   let id = req.params.id;
-  db.get("books")
-    .remove({ id: id })
-    .write();
+  await Book.findByIdAndRemove(id)
   res.redirect("/books");
 };

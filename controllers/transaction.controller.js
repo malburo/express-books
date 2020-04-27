@@ -1,4 +1,3 @@
-
 const Book = require("../models/book.model")
 const User = require("../models/user.model")
 const Transaction = require("../models/transaction.model")
