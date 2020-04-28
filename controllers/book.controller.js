@@ -1,13 +1,6 @@
 const Book = require("../models/book.model")
 
 module.exports.index = async (req, res, next) => {
-  try {
-    var a; a.b();
-  } catch(e) {
-    next(e);
-    return;
-  }
-
   let page = parseInt(req.query.page) || 1;
   let perPage = 8;
   let start = (page - 1) * perPage;

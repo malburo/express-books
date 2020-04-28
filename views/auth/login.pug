@@ -6,7 +6,7 @@ block content
         h3.mb-3 Sign up
         if errors
           if errors.wrongLoginCount 
-            p= errors.wrongLoginCount 
+            p= errors.wrongLoginCount
           form(action="/auth/login", method="POST")
             .form-group
               input.form-control(type='email', placeholder='Enter email', name="email",value=currentValues ? currentValues.email:"", class=errors.email ? "is-invalid":"")
@@ -16,7 +16,8 @@ block content
               input.form-control(type='password', placeholder='Password', name="password", class=errors.password ? "is-invalid":"")
               if errors.password
                 .invalid-feedback= errors.password
-            .text-center
+            a(href="/auth/login/reset") Quên mật khẩu
+            .text-center.mt-2
               button.btn.btn-primary.px-10(type='submit') Submit
         else
           form(action="/auth/login", method="POST")

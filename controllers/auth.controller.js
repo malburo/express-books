@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model")
-
+const sgMail = require('@sendgrid/mail');
+const shortid = require('shortid');
 module.exports.login = (req, res) => {
   res.render("auth/login");
 };
@@ -18,21 +19,8 @@ module.exports.postLogin = async (req, res) => {
     return;
   }
   if (user.wrongLoginCount >= 4) {
-    // const mailgun = require("mailgun-js");
-    // const api_key = "";
-    // const DOMAIN = "sandboxe6b9e87a28134c08bbf4f23d91924e7e.mailgun.org";
-    // const mg = mailgun({ apiKey: api_key, domain: DOMAIN });
-    // const data = {
-    //   from: "Admin <vickyvuvo@gmail.com>",
-    //   to: "tonqquocbao@gmail.com",
-    //   subject: "Hello",
-    //   text: "Testing some Mailgun awesomness!"
-    // };
-    // mg.messages().send(data, function(error, body) {
-    //   console.log(body);
-    // });
     errors.wrongLoginCount =
-      "Bạn đã nhập sai mật khẩu 4 lần liên tiếp, tài khoản của bạn đã bị khóa, vui lòng gặp trực tiếp admin để mở khóa tài khoản =))";
+      "Bạn đã nhập sai mật khẩu quá nhiều lần liên tiếp, tài khoản của bạn đã bị khóa, nhấp vào quên mật khẩu !!";
     res.render("auth/login", {
       errors: errors,
       currentValues: req.body
@@ -40,10 +28,10 @@ module.exports.postLogin = async (req, res) => {
     return;
   }
   const match = await bcrypt.compare(req.body.password, user.password);
-
   if (!match) {
     //login
     user.wrongLoginCount++;
+    user.save()
     errors.password = "Password is wrong";
     // console.log(user.wrongLoginCount);
     res.render("auth/login", {
@@ -53,9 +41,43 @@ module.exports.postLogin = async (req, res) => {
     return;
   }
   user.wrongLoginCount = 0;
+  user.save()
   res.cookie("userId", user.id, {
     signed: true
   });
 
   res.redirect("/");
+};
+
+module.exports.reset = (req, res) => {
+  res.render("auth/reset");
+};
+
+module.exports.postReset = async (req, res) => {
+  let user = await User.findOne({email: req.body.email})
+  if(user) {
+    user.wrongLoginCount = 0;
+    user.save()
+    let newPassword = shortid.generate();
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    user.save();
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: user.email,
+      from: 'tonqquocbao0605@gmail.com',
+      subject: `From malburo with love <3`,
+      text: `Xin chào,có vẻ như bạn đang gặp vấn đề về đăng nhập, mật khẩu mới của bạn là: ${newPassword}`
+    };
+    sgMail.send(msg);
+    let message = "Chúng tôi đã gửi mật khẩu mới vào email, hãy dùng nó để đăng nhập"
+    res.render("auth/reset", {
+      message: message
+    });
+    return
+  }  
+  let message = "Xin lỗi, email này chưa được đăng kí"
+  res.render("auth/reset", {
+    message: message
+  });
 };

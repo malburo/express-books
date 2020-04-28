@@ -51,12 +51,12 @@ app.use("/cart", cartRouter);
 app.use("/api/transactions", apiTransactions)
 app.use("/api/login", apiLogin)
 
-app.use(function (err, req, res, next) {
-  res.status(500)
-  let errors = [];
-  errors.push(err)
-  res.render('errors', { errors: errors })
-})
+// app.use(function (err, req, res, next) {
+//   res.status(500)
+//   let errors = [];
+//   errors.push(err)
+//   res.render('errors', { errors: errors })
+// })
 
 var listener = app.listen(8080, function() {
   console.log("Listening on port " + listener.address().port);

@@ -1,0 +1,13 @@
+extends ../layouts/layout.pug
+block content
+  .row
+    .col-4.m-auto
+      .text-center
+        h3.mb-5 Reset password
+          form.mt-2(action="/auth/login/reset", method="POST")
+            .form-group
+              input.form-control(type='email', placeholder='Nhập email của bạn', name="email")
+            .text-center
+              button.btn.btn-primary.px-10(type='submit') Submit
+        if message
+          p= message
