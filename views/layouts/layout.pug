@@ -1,6 +1,6 @@
 html
   head
-    title My library
+    title Malburo
     link(rel="shortcut icon", href="/images/favicon.svg")
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
@@ -10,14 +10,15 @@ html
 
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-      a.navbar-brand(href='#') My library
+      a.navbar-brand(href='#') Malburo
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarNavAltMarkup.collapse.navbar-collapse
         .navbar-nav
           a.nav-item.nav-link(href='/') Home 
           a.nav-item.nav-link(href='/books') Books
-          a.nav-item.nav-link(href='/transactions') Transactions
+          if isLogin
+            a.nav-item.nav-link(href='/transactions') Transactions
           if user.isAdmin
             a.nav-item.nav-link(href='/users') Users
       if amount

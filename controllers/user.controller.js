@@ -15,6 +15,7 @@ module.exports.index = async (req, res) => {
   res.render("users/index", {
     users: users
   });
+  
 };
 module.exports.create = (req, res) => {
   res.render("users/create");
@@ -54,15 +55,20 @@ module.exports.update = async (req, res) => {
 };
 module.exports.postUpdate = async (req, res) => {
   let id = req.params.id;
-  req.body.avatar = req.file.path
-    .split("/")
-    .slice(1)
-    .join("/");
-  cloudinary.uploader.upload(req.file.path, async (error, result) => {
-    req.body.avatar = result.url;
-    await User.findByIdAndUpdate(id, { name: req.body.name, avatar: req.body.avatar })
+  if(req.file) {
+      req.body.avatar = req.file.path
+        .split("/")
+        .slice(1)
+        .join("/");
+      cloudinary.uploader.upload(req.file.path, async (error, result) => {
+        req.body.avatar = result.url;
+        await User.findByIdAndUpdate(id, { name: req.body.name, avatar: req.body.avatar })
+        res.redirect(`/users/view/${id}`);
+      });
+      return
+    } 
+    await User.findByIdAndUpdate(id, {name: req.body.name})
     res.redirect(`/users/view/${id}`);
-  });
 };
 module.exports.delete = async (req, res) => {
   let id = req.params.id;

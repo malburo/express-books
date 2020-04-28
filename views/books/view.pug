@@ -1,5 +1,18 @@
 extends ../layouts/layout.pug
 block content
-  form(action="/books/" + book.id + "/update", method="POST")
-    input(name="title", type="text", value= book.title)
-    button Update
+  .text-center
+    h1.font-weight-light.mb-5 Update Book
+  .container
+    .row.d-flex.flex-column.align-content-md-center.align-items-md-center
+      .col.col-auto
+        img.rounded-circle(src= book.bookCover, width="200", height="200", style="object-fit: cover")
+      .col.col-4
+        form(action="/books/" + book.id + "/update", method="POST", enctype='multipart/form-data')
+          .form-group.col
+            input.form-control-file.mt-5(type='file', name='bookCover')
+          .form-group.col
+            input.form-control(type="text", name="title", placeholder="new name", value= book.title)
+          .form-group.col
+            input.form-control(type="text", name="decription", placeholder="new name", value= book.decription)
+          .text-center
+            button.btn.btn-primary.mt-2 Update
