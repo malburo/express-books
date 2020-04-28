@@ -35,7 +35,7 @@ module.exports.postCreate = async (req, res) => {
     isAdmin: false
     }; 
     users.create(user);
-  res.redirect("/users");
+  res.redirect("/auth/login" );
 };
 
 module.exports.get = async (req, res) => {

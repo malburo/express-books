@@ -70,6 +70,7 @@ module.exports.postReset = async (req, res) => {
       text: `Xin chào,có vẻ như bạn đang gặp vấn đề về đăng nhập, mật khẩu mới của bạn là: ${newPassword}`
     };
     sgMail.send(msg);
+    
     let message = "Chúng tôi đã gửi mật khẩu mới vào email, hãy dùng nó để đăng nhập"
     res.render("auth/reset", {
       message: message
@@ -81,3 +82,8 @@ module.exports.postReset = async (req, res) => {
     message: message
   });
 };
+
+module.exports.logout = (req, res) => {
+  res.clearCookie('userId');
+  res.redirect("/auth/login");
+}

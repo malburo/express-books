@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 app.use("/books", bookRouter);
-app.use("/users", authMiddleware.requireAuth, userRouter);
+app.use("/users", userRouter);
 app.use(
   "/transactions",
   authMiddleware.requireAuth,
