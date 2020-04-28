@@ -18,7 +18,7 @@ html
           a.nav-item.nav-link(href='/') Home 
           a.nav-item.nav-link(href='/books') Books
           a.nav-item.nav-link(href='/transactions') Transactions
-          if isAdmin
+          if user.isAdmin
             a.nav-item.nav-link(href='/users') Users
       if amount
         a.nav-item.nav-link.text-light(href='#') Cart(#{amount})
