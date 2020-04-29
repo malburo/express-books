@@ -61,7 +61,7 @@ app.use(function (err, req, res, next) {
   errors.push(err)
   res.render('errors', { errors: errors })
 })
-
-var listener = app.listen(8080, function() {
+let port = process.env.PORT || 8080
+var listener = app.listen(port, function() {
   console.log("Listening on port " + listener.address().port);
 });
