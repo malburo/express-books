@@ -74,6 +74,18 @@ module.exports.postUpdate = async (req, res) => {
       res.redirect(`/users/view/${id}`);
       return
   }
+  if(req.file) {
+    req.body.avatar = req.file.path
+      .split("/")
+      .slice(1)
+      .join("/");
+    cloudinary.uploader.upload(req.file.path, async (error, result) => {
+      req.body.avatar = result.url;
+      await User.findByIdAndUpdate(id, { name: req.body.name, avatar: req.body.avatar, password: req.body.password })
+      res.redirect(`/users/view/${id}`);
+    });
+    return
+  } 
   await User.findByIdAndUpdate(id, {name: req.body.name})
   res.redirect(`/users/view/${id}`);
 };
