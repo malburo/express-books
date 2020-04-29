@@ -9,16 +9,16 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true
 });
 mongoose.connection.on('connected', () => {
-  console.log("Mongoose is connectedd")
+  console.log("Mongoose is connected")
 });
 mongoose.set('useFindAndModify', false);
 
 const bookRouter = require("./routes/book.route");
 const userRouter = require("./routes/user.route");
-const transactionsRouter = require("./routes/transactions.route");
 const authRouter = require("./routes/auth.route");
 const cartRouter = require("./routes/cart.route");
 const shopRouter = require("./routes/shop.route");
+const transactionsRouter = require("./routes/transactions.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
 const sessionMiddleware = require("./middlewares/session.middleware.js");
@@ -34,7 +34,7 @@ app.set("views", "./views");
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser("ahihi"));
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(sessionMiddleware);
 app.get("/", (req, res) => {
