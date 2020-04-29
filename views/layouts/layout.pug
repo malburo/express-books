@@ -7,9 +7,8 @@ html
     script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
     script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
-
   body
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.shadow.fixed-top
       a.navbar-brand(href='#') Malburo
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
@@ -19,18 +18,31 @@ html
           a.nav-item.nav-link(href='/books') Books
           if isLogin
             a.nav-item.nav-link(href='/transactions') Transactions
+            a.nav-item.nav-link(href=`/shop/${user.id}`) My shop
           if user.isAdmin
             a.nav-item.nav-link(href='/users') Users
       if amount
-        a.nav-item.nav-link.text-light(href='#') Cart(#{amount})
+        .btn-group.mr-3
+          button#Cart.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            | Cart
+            span.badge.badge-light.ml-2= amount
+          .dropdown-menu.dropdown-menu-right(aria-labelledby='Cart', style="width: 300px")
+            if !isLogin
+              a.list-group-item.list-group-item-action(href='/auth/login') Hãy login để mua sách bạn nhé !
+            else
+              a.list-group-item.list-group-item-action(href='/cart/pay/buyBook') Ấn vào đây để thêm đơn vào transactionss
       if !isLogin
         a.nav-item.nav-link.text-light(href='/auth/login') Login
         a.nav-item.nav-link.text-light(href='/users/create') Sign up
       else
         .btn-group
-          button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')= user.name
-          .dropdown-menu.dropdown-menu-right
+          button#Account.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')= user.name
+          .dropdown-menu.dropdown-menu-right(aria-labelledby='Account')
             a.dropdown-item(href=`/users/view/${user.id}`) My account
             a.dropdown-item(href='/auth/logout') Logout
-    .container.pt-5
+      
+
+
+  block index
+    .container.pt-5.mt-5
       block content

@@ -1,7 +1,9 @@
 extends ../layouts/layout.pug
 block content
   .d-flex.justify-content-between.align-items-center.mb-5
-    h3 All Books
+    h3 #{nameStore}'s Books
+    if isSeller
+      a.btn.btn-primary(href=`/shop/${user.id}/create`) Create new books
   .row
     each book in books
       .col-3
@@ -10,9 +12,14 @@ block content
           .card-body
             h5.card-title= book.title
             p.card-text= book.decription
-            p.card-text.small  Người bán: #{book.nameSeller}
-            .d-flex.justify-content-around.mt-3
-              a.btn.btn-primary(href="/cart/" + book.id) Thêm vào giỏ hàng
+            p.card-text Người bán: #{book.nameSeller}
+            if isSeller
+              .d-flex.justify-content-around
+                a.btn.btn-primary(href=`/shop/${user.id}/${book.id}`, label="update") Update
+                a.btn.btn-primary(href=`/shop/${user.id}/${book.id}/delete`, label="delete") Delete
+            if !isSeller
+              .d-flex.justify-content-around.mt-3
+                a.btn.btn-primary(href="/cart/" + book.id) Thêm vào giỏ hàng
   if !isEmtyBooks
     if page === 1
       nav(aria-label='Page navigation example')
@@ -41,4 +48,4 @@ block content
           li.page-item
           a.page-link(href='?page='+ (page+1)) Next
   else
-    p Hết sản phẩm rùi ahihi
+    h1.lead Bạn chưa có sản phẩm nào, hãy tạo sách và bán cho mọi người <3

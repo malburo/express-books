@@ -11,7 +11,9 @@ block content
           .form-group.col
             input.form-control-file.mt-5(type='file', name='avatar')
           .form-group.col
-            input.form-control(type="text", name="name", placeholder="new name", value= user.name)
+            input.form-control(type="text", name="name", value= user.name)
+          .form-group.col
+            input.form-control(type="password", name="password", value="******")
             .text-center
               button.btn.btn-primary.mt-2 Update
         

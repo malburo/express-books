@@ -18,6 +18,7 @@ const userRouter = require("./routes/user.route");
 const transactionsRouter = require("./routes/transactions.route");
 const authRouter = require("./routes/auth.route");
 const cartRouter = require("./routes/cart.route");
+const shopRouter = require("./routes/shop.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
 const sessionMiddleware = require("./middlewares/session.middleware.js");
@@ -48,15 +49,18 @@ app.use(
 );
 app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
+app.use("/shop", shopRouter);
+
+
 app.use("/api/transactions", apiTransactions)
 app.use("/api/login", apiLogin)
 
-// app.use(function (err, req, res, next) {
-//   res.status(500)
-//   let errors = [];
-//   errors.push(err)
-//   res.render('errors', { errors: errors })
-// })
+app.use(function (err, req, res, next) {
+  res.status(500)
+  let errors = [];
+  errors.push(err)
+  res.render('errors', { errors: errors })
+})
 
 var listener = app.listen(8080, function() {
   console.log("Listening on port " + listener.address().port);
