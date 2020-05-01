@@ -33,7 +33,7 @@ html
               a.list-group-item.list-group-item-action(href='/cart/pay/buyBook') Ấn vào đây để thêm đơn vào transactionss
       if !isLogin
         a.nav-item.nav-link.text-light(href='/auth/login') Login
-        a.nav-item.nav-link.text-light(href='/users/create') Sign up
+        a.nav-item.nav-link.text-light(href='/users/create') Register
       else
         .btn-group
           button#Account.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')= user.name
