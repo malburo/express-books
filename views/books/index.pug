@@ -16,32 +16,33 @@ block content
             p.card-text.small  Người bán: #{book.nameSeller}
             .d-flex.justify-content-around.mt-3
               a.btn.btn-primary(href="/cart/" + book.id) Thêm vào giỏ hàng
-  if !isEmtyBooks
-    if page === 1
-      nav(aria-label='Page navigation example')
-        ul.pagination.justify-content-center
-          li.page-item.disabled
-            a.page-link(href='#', tabindex='-1', aria-disabled='true', name="page") Previous
-          li.page-item
-            a.page-link(href='?page='+ page)= page
-          li.page-item
-            a.page-link(href='?page='+ (page+1))= page+1
-          li.page-item
-            a.page-link(href='?page='+ (page+2))= page+2      
-          li.page-item
+  if page
+    if !isEmtyBooks
+      if page === 1
+        nav(aria-label='Page navigation example')
+          ul.pagination.justify-content-center
+            li.page-item.disabled
+              a.page-link(href='#', tabindex='-1', aria-disabled='true', name="page") Previous
+            li.page-item
+              a.page-link(href='?page='+ page)= page
+            li.page-item
+              a.page-link(href='?page='+ (page+1))= page+1
+            li.page-item
+              a.page-link(href='?page='+ (page+2))= page+2      
+            li.page-item
+              a.page-link(href='?page='+ (page+1)) Next
+      else
+        nav(aria-label='Page navigation example')
+          ul.pagination.justify-content-center
+            li.page-item
+              a.page-link(href='?page='+ (page-1)) Previous
+            li.page-item
+              a.page-link(href='?page='+ (page-1))= page-1
+            li.page-item
+              a.page-link(href='?page='+ page)= page
+            li.page-item
+              a.page-link(href='?page='+ (page+1))= page+1           
+            li.page-item
             a.page-link(href='?page='+ (page+1)) Next
     else
-      nav(aria-label='Page navigation example')
-        ul.pagination.justify-content-center
-          li.page-item
-            a.page-link(href='?page='+ (page-1)) Previous
-          li.page-item
-            a.page-link(href='?page='+ (page-1))= page-1
-          li.page-item
-            a.page-link(href='?page='+ page)= page
-          li.page-item
-            a.page-link(href='?page='+ (page+1))= page+1           
-          li.page-item
-          a.page-link(href='?page='+ (page+1)) Next
-  else
-    p Hết sản phẩm rùi ahihi
+      p Hết sản phẩm rùi ahihi
