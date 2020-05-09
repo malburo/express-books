@@ -1,17 +1,17 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
-mongoose.connection.on('connected', () => {
-  console.log("Mongoose is connected")
+mongoose.connection.on("connected", () => {
+  console.log("Mongoose is connected");
 });
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify", false);
 
 const bookRouter = require("./routes/book.route");
 const userRouter = require("./routes/user.route");
@@ -24,8 +24,9 @@ const authMiddleware = require("./middlewares/auth.middleware");
 const sessionMiddleware = require("./middlewares/session.middleware.js");
 
 // api
-const apiTransactions = require("./api/routes/transaction.route")
-const apiLogin = require("./api/routes/auth.route")
+const apiTransactions = require("./api/routes/transaction.route");
+const apiLogin = require("./api/routes/auth.route");
+const apiBooks = require("./api/routes/book.route");
 var cookieParser = require("cookie-parser");
 
 app.set("view engine", "pug");
@@ -42,26 +43,22 @@ app.get("/", (req, res) => {
 });
 app.use("/books", bookRouter);
 app.use("/users", userRouter);
-app.use(
-  "/transactions",
-  authMiddleware.requireAuth,
-  transactionsRouter
-);
+app.use("/transactions", authMiddleware.requireAuth, transactionsRouter);
 app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
 app.use("/shop", shopRouter);
 
-
-app.use("/api/transactions", apiTransactions)
-app.use("/api/login", apiLogin)
+app.use("/api/transactions", apiTransactions);
+app.use("/api/login", apiLogin);
+app.use("/api/books", apiBooks);
 
 app.use(function (err, req, res, next) {
-  res.status(500)
+  res.status(500);
   let errors = [];
-  errors.push(err)
-  res.render('errors', { errors: errors })
-})
-let port = process.env.PORT || 8080
-var listener = app.listen(port, function() {
+  errors.push(err);
+  res.render("errors", { errors: errors });
+});
+let port = process.env.PORT || 8080;
+var listener = app.listen(port, function () {
   console.log("Listening on port " + listener.address().port);
 });

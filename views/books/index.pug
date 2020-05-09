@@ -2,6 +2,9 @@ extends ../layouts/layout.pug
 block content
   .d-flex.justify-content-between.align-items-center.mb-5
     h3 All Books
+    form.form-inline(action="/books/search", method="GET")
+      input.form-control(type='text', placeholder='Search...', name="title")
+      button.btn.btn-primary Search
   .row
     each book in books
       .col-3
