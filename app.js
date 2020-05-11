@@ -1,9 +1,9 @@
 require("dotenv").config();
 const express = require("express");
+var cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -31,7 +31,7 @@ var cookieParser = require("cookie-parser");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
-
+app.use(cors());
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
