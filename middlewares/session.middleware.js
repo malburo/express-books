@@ -6,18 +6,18 @@ module.exports = async (req, res, next) => {
   res.locals.isLogin = false;
   if (!req.signedCookies.sessionId) {
     let session = new Session({
-      cart: []
+      cart: {}
     })
     session.save();
     res.cookie('sessionId', session.id, {
       signed: true
     });
   }
-  let objCart = await Session.findById(req.signedCookies.sessionId)
-  if(objCart) {
-      if(objCart.cart) {
-          res.locals.amount = objCart.cart.length
-      }
+  let findSession = await Session.findById(req.signedCookies.sessionId)
+  if (findSession !== null && findSession.cart) {
+    res.locals.amount = await Object.values(findSession.cart).reduce((a, b) => {
+      return a + b;
+    }, 0)
   }
   if (req.signedCookies.userId) {
     let user = await User.findById(req.signedCookies.userId)

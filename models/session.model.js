@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const sessionSchema = new mongoose.Schema({
-    cart: []
-})
+    cart: { type: mongoose.Schema.Types.Mixed, default: {} }
+}, { minimize: false })
 
 
 var Session = mongoose.model('sessions', sessionSchema);
