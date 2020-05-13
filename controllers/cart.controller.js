@@ -25,23 +25,23 @@ module.exports.addToCart = async (req, res) => {
 
 module.exports.pay = async (req, res) => {
   if (req.signedCookies.userId) {
-    let sessions = await Session.findById(req.signedCookies.sessionId)
-    let listOrder = sessions.cart
+    let session = await Session.findById(req.signedCookies.sessionId)
+    let listOrder = session.cart
     let userId = req.signedCookies.userId;
     let user = await User.findById(userId)
-    for (idBook of listOrder) {
+    for (idBook in listOrder) {
       let book = await Book.findById(idBook)
       let transaction = {
         userId,
-        bookId: idBook,
+        bookId: book.id,
         userName: user.name,
         bookTitle: book.title,
         isComplete: false
       };
       await Transaction.create(transaction)
     }
-    sessions.cart = [];
-    sessions.save()
+    session.cart = {};
+    session.save()
     res.redirect("/transactions");
     return
   }
